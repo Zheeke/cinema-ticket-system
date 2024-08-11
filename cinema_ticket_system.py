@@ -19,10 +19,15 @@ class CinemaTicketSystem():
 
     #next 2 functions are for assigning id for variables and saving the record to the dict
     def addUser(self,userName):
-        userId = next(self.user_id_generator)
-        self.users[userId] = userName
-        return userId
-    
+        while True:
+            if userName not in self.users or " " in userName or not userName.isalnum(): 
+                userId = next(self.user_id_generator)
+                self.users[userId] = userName
+                return userId
+            else: 
+                print("Вы ввели некорректное имя пользователя либо пользователь с таким именем уже существует")
+                continue
+              
     def addMovie(self, movieName):
         movieId = next(self.movie_id_generator)
         self.movies[movieId] = movieName
